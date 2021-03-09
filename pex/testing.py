@@ -94,6 +94,7 @@ def temporary_content(content_map, interp=None, seed=31337, perms=0o644):
     with temporary_dir() as td:
         for filename, size_or_content in content_map.items():
             dest = os.path.join(td, filename)
+            print(f'DO I GET HERE?: {dest}')
             safe_mkdir(os.path.dirname(dest))
             with open(dest, "wb") as fp:
                 if isinstance(size_or_content, int):
