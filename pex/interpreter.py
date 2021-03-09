@@ -899,7 +899,7 @@ class PythonInterpreter(object):
 
         version = self._identity.version
         abi_tag = self._identity.abi_tag
-        print(f'LIINE 902: version: {version} and abi_tag: {abi_tag}')
+        print(f'LINE 902: version: {version} and abi_tag: {abi_tag}')
         prefix = "pypy" if self._identity.interpreter == "PyPy" else "python"
         suffixes = ("{}.{}".format(version[0], version[1]), str(version[0]), "")
         candidate_binaries = tuple("{}{}".format(prefix, suffix) for suffix in suffixes)

@@ -489,6 +489,8 @@ def is_exe(path):
     :param path: The path to check.
     :return: `True if the given path is an file executable by the current user.
     """
+    print(os.path.isfile(path))
+    print(os.access(path, os.R_OK | os.X_OK))
     return os.path.isfile(path) and os.access(path, os.R_OK | os.X_OK)
 
 
