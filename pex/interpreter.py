@@ -872,6 +872,7 @@ class PythonInterpreter(object):
         If this interpreter is not homed in a virtual environment, returns itself.
         """
         if not self.is_venv:
+            print('here')
             return self
 
         # In the case of PyPy, the <base_prefix> dir might contain one of the following:
