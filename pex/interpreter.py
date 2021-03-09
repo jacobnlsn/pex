@@ -907,7 +907,7 @@ class PythonInterpreter(object):
         print(f'LINE 906: prefix: {prefix} and suffixes: {suffixes} and candidate_binaries: {candidate_binaries}')
         def iter_base_candidate_binary_paths(interpreter):
             # type: (PythonInterpreter) -> Iterator[str]
-            bin_dir = os.path.join(interpreter._identity.base_prefix, "bin\\")
+            bin_dir = interpreter._identity.base_prefix
             print(f'LINE 910: bin_dir: {bin_dir}')
             print(os.listdir(bin_dir))
             for candidate_binary in candidate_binaries:
