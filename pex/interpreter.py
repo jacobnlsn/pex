@@ -18,6 +18,7 @@ from textwrap import dedent
 from pex import third_party
 from pex.common import is_exe, safe_mkdtemp, safe_rmtree, temporary_dir
 from pex.compatibility import string
+from pex.compatibility import WINDOWS
 from pex.executor import Executor
 from pex.jobs import ErrorHandler, Job, Retain, SpawnedJob, execute_parallel
 from pex.orderedset import OrderedSet
@@ -903,10 +904,15 @@ class PythonInterpreter(object):
         prefix = "pypy" if self._identity.interpreter == "PyPy" else "python"
         suffixes = ("{}.{}".format(version[0], version[1]), str(version[0]), "")
         candidate_binaries = tuple("{}{}".format(prefix, suffix) for suffix in suffixes)
+        
+        if WINDOWS:
+            candidate_binaries = tuple("{}.exe".format(binary) for binary in candidate_binaries)
 
         def iter_base_candidate_binary_paths(interpreter):
             # type: (PythonInterpreter) -> Iterator[str]
-            bin_dir = os.path.join(interpreter._identity.base_prefix, "bin")
+            bin_dir = interpreter._identity.base_prefix
+            if not WINDOWS:
+                bin_dir = os.path.join(bin_dir, "bin")
             for candidate_binary in candidate_binaries:
                 candidate_binary_path = os.path.join(bin_dir, candidate_binary)
                 if is_exe(candidate_binary_path):
