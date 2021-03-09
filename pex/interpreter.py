@@ -909,6 +909,7 @@ class PythonInterpreter(object):
             # type: (PythonInterpreter) -> Iterator[str]
             bin_dir = os.path.join(interpreter._identity.base_prefix, "bin")
             print(f'LINE 910: bin_dir: {bin_dir}')
+            print(os.listdir(bin_dir))
             for candidate_binary in candidate_binaries:
                 candidate_binary_path = os.path.join(bin_dir, candidate_binary)
                 print(f'LINE 913: candidate_binary_path {candidate_binary_path}')
