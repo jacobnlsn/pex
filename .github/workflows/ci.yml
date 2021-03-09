@@ -35,26 +35,3 @@ jobs:
         uses: ./.github/actions/run-tox
         with:
           tox-env: py${{ join(matrix.python-version, '') }}
-  cpython-integration-tests:
-    name: (${{ matrix.os }}) TOXENV=py${{ join(matrix.python-version, '') }}-integration
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        python-version: [[3, 9]]
-        os: [windows-2019]
-    steps:
-      - name: Checkout Pex
-        uses: actions/checkout@v2
-      - name: Setup Python ${{ join(matrix.python-version, '.') }}
-        uses: actions/setup-python@v2
-        with:
-          python-version: "${{ join(matrix.python-version, '.') }}"
-      - name: Cache Pyenv Interpreters
-        uses: actions/cache@v2
-        with:
-          path: ${{ env._PEX_TEST_PYENV_ROOT }}
-          key: ${{ runner.os }}-pyenv-root
-      - name: Run Integration Tests
-        uses: ./.github/actions/run-tox
-        with:
-          tox-env: py${{ join(matrix.python-version, '') }}-integration

@@ -899,22 +899,26 @@ class PythonInterpreter(object):
 
         version = self._identity.version
         abi_tag = self._identity.abi_tag
-
+        print(f'LIINE 902: version: {version} and abi_tag: {abi_tag}')
         prefix = "pypy" if self._identity.interpreter == "PyPy" else "python"
         suffixes = ("{}.{}".format(version[0], version[1]), str(version[0]), "")
         candidate_binaries = tuple("{}{}".format(prefix, suffix) for suffix in suffixes)
-
+        print(f'LINE 906: prefix: {prefix} and suffixes: {suffixes} and candidate_binaries: {candidate_binaries}')
         def iter_base_candidate_binary_paths(interpreter):
             # type: (PythonInterpreter) -> Iterator[str]
             bin_dir = os.path.join(interpreter._identity.base_prefix, "bin")
+            print(f'LINE 910: bin_dir: {bin_dir}')
             for candidate_binary in candidate_binaries:
                 candidate_binary_path = os.path.join(bin_dir, candidate_binary)
+                print(f'LINE 913: candidate_binary_path {candidate_binary_path}')
                 if is_exe(candidate_binary_path):
+                    print('LINE 915: FOUND EXE')
                     yield candidate_binary_path
 
         def is_same_interpreter(interpreter):
             # type: (PythonInterpreter) -> bool
             identity = interpreter._identity
+            print(f'LINE 921: identity.version {identity.version} and version {version} and identity.abi_tag {identity.abi_tag} and abi_tag {abi_tag}')
             return identity.version == version and identity.abi_tag == abi_tag
 
         resolution_path = []  # type: List[str]
