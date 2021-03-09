@@ -882,7 +882,7 @@ def build_pex(reqs, options, cache=None):
         path=safe_mkdtemp(),
         interpreter=interpreter,
         preamble=preamble,
-        copy_mode=CopyMode.SYMLINK,
+        copy_mode=CopyMode.COPY,
         include_tools=options.include_tools or options.venv,
     )
 
