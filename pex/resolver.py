@@ -585,7 +585,7 @@ class BuildAndInstallRequest(object):
         if not any((self._build_requests, self._install_requests)):
             # Nothing to build or install.
             return ()
-
+        print(f'CACHE: {self._cache}  WORKSPACE: {workspace}  safe_mkdtemp():  {safe_mkdtemp()}')
         cache = self._cache or workspace or safe_mkdtemp()
 
         built_wheels_dir = os.path.join(cache, "built_wheels")
