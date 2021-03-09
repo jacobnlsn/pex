@@ -911,7 +911,7 @@ class PythonInterpreter(object):
             print(f'LINE 910: bin_dir: {bin_dir}')
             print(os.listdir(bin_dir))
             for candidate_binary in candidate_binaries:
-                candidate_binary_path = os.path.join(bin_dir, candidate_binary)
+                candidate_binary_path = os.path.join(bin_dir, candidate_binary + '.exe')
                 print(f'LINE 913: candidate_binary_path {candidate_binary_path}')
                 if is_exe(candidate_binary_path):
                     print('LINE 915: FOUND EXE')
