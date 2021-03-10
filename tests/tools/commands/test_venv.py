@@ -16,7 +16,7 @@ from textwrap import dedent
 import pytest
 
 from pex.common import safe_open, temporary_dir, touch
-from pex.compatibility import PY2
+from pex.compatibility import PY2, WINDOWS
 from pex.executor import Executor
 from pex.interpreter import PythonInterpreter
 from pex.pex_builder import CopyMode, PEXBuilder
@@ -530,7 +530,7 @@ def test_compile(tmpdir):
     result.assert_success()
 
     venv = os.path.join(str(tmpdir), "venv")
-    subprocess.check_call(args=[pex_file, "venv", venv], env=make_env(PEX_TOOLS=1))
+    subprocess.check_call(args=[pex_file, "venv", venv], env=make_env(PEX_TOOLS=1), shell=WINDOWS)
     # N.B.: The right way to discover the site-packages dir is via site.getsitepackages().
     # Unfortunately we use an old version of virtualenv to create PyPy and CPython 2.7 venvs and it
     # does not add a getsitepackages function to site.py; so we cheat.
