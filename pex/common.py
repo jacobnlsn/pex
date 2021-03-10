@@ -405,7 +405,7 @@ def atomic_directory(target_dir, exclusive, source=None):
         if lock_fd is None:
             return
         try:
-            if sys.platform == 'win32':
+            if sys.platform == "win32":
                 msvcrt.locking(lock_fd, msvcrt.LK_UNLCK, 1)
             else:
                 fcntl.lockf(lock_fd, fcntl.LOCK_UN)
@@ -425,7 +425,7 @@ def atomic_directory(target_dir, exclusive, source=None):
         # N.B.: Since lockf operates on an open file descriptor and these are guaranteed to be
         # closed by the operating system when the owning process exits, this lock is immune to
         # staleness.
-        if sys.platform == 'win32':
+        if sys.platform == "win32":
             while True:
                 # Force the non-blocking lock to be blocking. LK_LOCK is msvcrt's implementation of
                 # a blocking lock, but it only tries 10 times, once per second before rasing an
